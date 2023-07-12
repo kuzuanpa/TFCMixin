@@ -1,0 +1,16 @@
+[
+{
+  "modid": "thinker-mixin",
+  "name": "Thinker",
+  "description": "Mixins for Thinker.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["kuzuanpa"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
