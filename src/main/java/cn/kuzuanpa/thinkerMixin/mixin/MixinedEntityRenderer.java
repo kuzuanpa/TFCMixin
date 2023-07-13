@@ -34,6 +34,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.nio.FloatBuffer;
 import java.util.Random;
 
+import static cn.kuzuanpa.thinkerMixin.thinkerMixin.isSkyRenderDisabled;
+
 @Mixin(EntityRenderer.class)
 public class MixinedEntityRenderer implements IResourceManagerReloadListener {
     @Shadow
@@ -77,29 +79,28 @@ public class MixinedEntityRenderer implements IResourceManagerReloadListener {
     @Shadow
     protected void renderRainSnow(float p_78474_1_){}
 
-    public boolean disableSkyRender(){
-        return false;
+    public boolean isSkyRenderDisabled() {
+        return isSkyRenderDisabled;
     }
 
     /**
      * @author kuzuanpa
      * @reason Disable sky and fog render when necessary
      */
-    @Inject(method = "renderWorld", at = @At("HEAD"))
-    public void inject$renderWorld(float p_78471_1_, long p_78471_2_, CallbackInfo ci) {
+    @Inject(method = "renderWorld", at = @At("HEAD"), cancellable = true)
+    public void mixin$renderWorld(float p_78471_1_, long p_78471_2_, CallbackInfo ci) {
         FMLLog.log(Level.FATAL, "Debug Point 0");
-        if (disableSkyRender()) {
+        if (isSkyRenderDisabled()) {
             FMLLog.log(Level.FATAL, "Debug Point 1");
             this.mc.mcProfiler.startSection("lightTex");
 
-            if (this.lightmapUpdateNeeded) {
-                this.updateLightmap(p_78471_1_);
-            }
+            //if (this.lightmapUpdateNeeded) {
+            //    this.updateLightmap(p_78471_1_);
+            //}
 
             GL11.glEnable(GL11.GL_CULL_FACE);
             GL11.glEnable(GL11.GL_DEPTH_TEST);
             GL11.glEnable(GL11.GL_ALPHA_TEST);
-            GL11.glAlphaFunc(GL11.GL_GREATER, 0.5F);
 
             if (this.mc.renderViewEntity == null) {
                 this.mc.renderViewEntity = this.mc.thePlayer;
@@ -116,19 +117,19 @@ public class MixinedEntityRenderer implements IResourceManagerReloadListener {
             this.mc.mcProfiler.endStartSection("center");
 
             for (int j = 0; j < 2; ++j) {
-                if (this.mc.gameSettings.anaglyph) {
-                    anaglyphField = j;
-
-                    if (anaglyphField == 0) {
-                        GL11.glColorMask(false, true, true, false);
-                    } else {
-                        GL11.glColorMask(true, false, false, false);
-                    }
-                }
+                //if (this.mc.gameSettings.anaglyph) {
+                //    anaglyphField = j;
+                //
+                //    if (anaglyphField == 0) {
+                //        GL11.glColorMask(false, true, true, false);
+                //    } else {
+                //        GL11.glColorMask(true, false, false, false);
+                //    }
+                //}
 
                 this.mc.mcProfiler.endStartSection("clear");
                 GL11.glViewport(0, 0, this.mc.displayWidth, this.mc.displayHeight);
-                this.updateFogColor(p_78471_1_);
+                //this.updateFogColor(p_78471_1_);
                 GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
                 GL11.glEnable(GL11.GL_CULL_FACE);
                 this.mc.mcProfiler.endStartSection("camera");
@@ -137,14 +138,14 @@ public class MixinedEntityRenderer implements IResourceManagerReloadListener {
                 this.mc.mcProfiler.endStartSection("frustrum");
                 ClippingHelperImpl.getInstance();
 
-                if (this.mc.gameSettings.renderDistanceChunks >= 4) {
-                    this.setupFog(-1, p_78471_1_);
-                    this.mc.mcProfiler.endStartSection("sky");
-                    renderglobal.renderSky(p_78471_1_);
-                }
+                //if (this.mc.gameSettings.renderDistanceChunks >= 4) {
+                //    this.setupFog(-1, p_78471_1_);
+                //    this.mc.mcProfiler.endStartSection("sky");
+                //    renderglobal.renderSky(p_78471_1_);
+                //}
 
-                GL11.glEnable(GL11.GL_FOG);
-                this.setupFog(1, p_78471_1_);
+                //GL11.glEnable(GL11.GL_FOG);
+                //this.setupFog(1, p_78471_1_);
 
                 if (this.mc.gameSettings.ambientOcclusion != 0) {
                     GL11.glShadeModel(GL11.GL_SMOOTH);
@@ -167,13 +168,13 @@ public class MixinedEntityRenderer implements IResourceManagerReloadListener {
                     }
                 }
 
-                if (entitylivingbase.posY < 128.0D) {
-                    this.renderCloudsCheck(renderglobal, p_78471_1_);
-                }
+                //if (entitylivingbase.posY < 128.0D) {
+                //    this.renderCloudsCheck(renderglobal, p_78471_1_);
+                //}
 
                 this.mc.mcProfiler.endStartSection("prepareterrain");
-                this.setupFog(0, p_78471_1_);
-                GL11.glEnable(GL11.GL_FOG);
+                //this.setupFog(0, p_78471_1_);
+                //GL11.glEnable(GL11.GL_FOG);
                 this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
                 RenderHelper.disableStandardItemLighting();
                 this.mc.mcProfiler.endStartSection("terrain");
@@ -235,7 +236,7 @@ public class MixinedEntityRenderer implements IResourceManagerReloadListener {
                     this.mc.mcProfiler.endStartSection("litParticles");
                     effectrenderer.renderLitParticles(entitylivingbase, p_78471_1_);
                     RenderHelper.disableStandardItemLighting();
-                    this.setupFog(0, p_78471_1_);
+                //    this.setupFog(0, p_78471_1_);
                     this.mc.mcProfiler.endStartSection("particles");
                     effectrenderer.renderParticles(entitylivingbase, p_78471_1_);
                     this.disableLightmap((double) p_78471_1_);
@@ -244,13 +245,13 @@ public class MixinedEntityRenderer implements IResourceManagerReloadListener {
                 GL11.glDepthMask(false);
                 GL11.glEnable(GL11.GL_CULL_FACE);
                 this.mc.mcProfiler.endStartSection("weather");
-                this.renderRainSnow(p_78471_1_);
+                //this.renderRainSnow(p_78471_1_);
                 GL11.glDepthMask(true);
                 GL11.glDisable(GL11.GL_BLEND);
                 GL11.glEnable(GL11.GL_CULL_FACE);
                 OpenGlHelper.glBlendFunc(770, 771, 1, 0);
                 GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-                this.setupFog(0, p_78471_1_);
+                //this.setupFog(0, p_78471_1_);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glDepthMask(false);
                 this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
@@ -297,12 +298,12 @@ public class MixinedEntityRenderer implements IResourceManagerReloadListener {
                 GL11.glDepthMask(true);
                 GL11.glEnable(GL11.GL_CULL_FACE);
                 GL11.glDisable(GL11.GL_BLEND);
-                GL11.glDisable(GL11.GL_FOG);
+                //GL11.glDisable(GL11.GL_FOG);
 
-                if (entitylivingbase.posY >= 128.0D) {
-                    this.mc.mcProfiler.endStartSection("aboveClouds");
-                    this.renderCloudsCheck(renderglobal, p_78471_1_);
-                }
+                //if (entitylivingbase.posY >= 128.0D) {
+                //    this.mc.mcProfiler.endStartSection("aboveClouds");
+                //    this.renderCloudsCheck(renderglobal, p_78471_1_);
+                //}
 
                 this.mc.mcProfiler.endStartSection("FRenderLast");
                 ForgeHooksClient.dispatchRenderLast(renderglobal, p_78471_1_);
@@ -316,15 +317,18 @@ public class MixinedEntityRenderer implements IResourceManagerReloadListener {
                 FMLLog.log(Level.FATAL, "Debug Point 2");
                 if (!this.mc.gameSettings.anaglyph) {
                     this.mc.mcProfiler.endSection();
-                    return;
+                    //return;
+                    ci.cancel();
                 }
             }
 
 
-            GL11.glColorMask(true, true, true, false);
+            //GL11.glColorMask(true, true, true, false);
             this.mc.mcProfiler.endSection();
-            return;
+            //return;
+            ci.cancel();
         }
         FMLLog.log(Level.FATAL, "Debug Point 3");
+
     }
 }
