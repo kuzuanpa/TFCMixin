@@ -1,7 +1,7 @@
 [
 {
-  "modid": "thinker-mixin",
-  "name": "Thinker",
+  "modid": "TFCMixin",
+  "name": "TFCMixin",
   "description": "Mixins for Thinker.",
   "version": "${version}",
   "mcversion": "${mcversion}",

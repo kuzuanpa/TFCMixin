@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.7.11",
+  "package": "cn.kuzuanpa.TFCMixin.mixin",
+  "refmap": "mixins.TFCMixin.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinPlayerFirstJoin"
+  ]
+}

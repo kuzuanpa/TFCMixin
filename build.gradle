@@ -35,8 +35,6 @@ archivesBaseName = "${jarName}"
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-tasks.compileJava.dependsOn compileScala
-tasks.compileScala.dependsOn.remove("compileJava")
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
@@ -71,7 +69,7 @@ def yourMixinConfig = "mixins.${modId}.json"
 def refMapForYourConfig = "mixins.${modId}.refmap.json"
 def relativePathToMixinAP = 'libs/mixin-0.8-SNAPSHOT.jar'
 
-def embedMixin = !project.hasProperty("nomixin");
+def embedMixin = false
 
 if (!embedMixin) {
     version += "-mixinless"
