@@ -2,7 +2,7 @@
 {
   "modid": "TFCMixin",
   "name": "TFCMixin",
-  "description": "Mixins for Thinker.",
+  "description": "Mixins for TerraFirmaCraft-TFRU.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
