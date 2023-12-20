@@ -1,6 +1,8 @@
 package cn.kuzuanpa.TFCMixin.mixin;
 
+import com.bioxx.tfc.api.TFCBlocks;
 import cpw.mods.fml.common.FMLLog;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
@@ -10,6 +12,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.WorldInfo;
 import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,18 +29,20 @@ public class MixinPlayerFirstJoin{
     private MinecraftServer mcServer;
 
 
+    //Make player
     @Inject(method = "initializeConnectionToPlayer", at = @At(value = "HEAD"),remap = false)
     public void initializeConnectionToPlayer(NetworkManager p_72355_1_, EntityPlayerMP p_72355_2_, NetHandlerPlayServer nethandlerplayserver, CallbackInfo ci){
-        World playerWorld = this.mcServer.worldServerForDimension(p_72355_2_.dimension);
         if (this.readPlayerDataFromFile(p_72355_2_)==null)
         {
             p_72355_2_.dimension=TFCDimID;
-            playerWorld=this.mcServer.worldServerForDimension(TFCDimID);
-            ChunkCoordinates spawnPoint = playerWorld.provider.getRandomizedSpawnPoint();
+            World playerWorld = this.mcServer.worldServerForDimension(p_72355_2_.dimension);
+            p_72355_2_.setWorld(playerWorld);
+            p_72355_2_.theItemInWorldManager.setWorld((WorldServer)p_72355_2_.worldObj);
+            ChunkCoordinates spawnPoint = playerWorld.provider.getSpawnPoint();
+            if(playerWorld.getWorldInfo().getSpawnY()!=spawnPoint.posY)p_72355_2_.getEntityWorld().getWorldInfo().setSpawnPosition(spawnPoint.posX,spawnPoint.posY,spawnPoint.posZ);
+            FMLLog.log(Level.FATAL,playerWorld.provider.dimensionId+"/Curr/"+spawnPoint.posX+spawnPoint.posY+spawnPoint.posZ);
             p_72355_2_.setPosition(spawnPoint.posX, spawnPoint.posY, spawnPoint.posZ);
         }
-        p_72355_2_.setWorld(playerWorld);
-        p_72355_2_.theItemInWorldManager.setWorld((WorldServer)p_72355_2_.worldObj);
     }
 
     @Shadow
