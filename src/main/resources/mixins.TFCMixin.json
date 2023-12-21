@@ -9,6 +9,7 @@
     "MixinEntityInPortal",
     "MixinPlayerFirstJoin",
     "MixinPlayerRespawn",
-    "MixinPortalCreation"
+    "MixinPortalCreation",
+    "MixinWorldInfo"
   ]
 }

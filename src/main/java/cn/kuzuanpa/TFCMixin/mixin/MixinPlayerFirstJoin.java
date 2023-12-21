@@ -29,20 +29,19 @@ public class MixinPlayerFirstJoin{
     private MinecraftServer mcServer;
 
 
-    //Make player
+    //Make player born in TFCDim when first join.
     @Inject(method = "initializeConnectionToPlayer", at = @At(value = "HEAD"),remap = false)
     public void initializeConnectionToPlayer(NetworkManager p_72355_1_, EntityPlayerMP p_72355_2_, NetHandlerPlayServer nethandlerplayserver, CallbackInfo ci){
+        World playerWorld = this.mcServer.worldServerForDimension(p_72355_2_.dimension);
         if (this.readPlayerDataFromFile(p_72355_2_)==null)
         {
             p_72355_2_.dimension=TFCDimID;
-            World playerWorld = this.mcServer.worldServerForDimension(p_72355_2_.dimension);
-            p_72355_2_.setWorld(playerWorld);
-            p_72355_2_.theItemInWorldManager.setWorld((WorldServer)p_72355_2_.worldObj);
+            playerWorld = this.mcServer.worldServerForDimension(p_72355_2_.dimension);
             ChunkCoordinates spawnPoint = playerWorld.provider.getSpawnPoint();
-            if(playerWorld.getWorldInfo().getSpawnY()!=spawnPoint.posY)p_72355_2_.getEntityWorld().getWorldInfo().setSpawnPosition(spawnPoint.posX,spawnPoint.posY,spawnPoint.posZ);
-            FMLLog.log(Level.FATAL,playerWorld.provider.dimensionId+"/Curr/"+spawnPoint.posX+spawnPoint.posY+spawnPoint.posZ);
             p_72355_2_.setPosition(spawnPoint.posX, spawnPoint.posY, spawnPoint.posZ);
         }
+        p_72355_2_.setWorld(playerWorld);
+        p_72355_2_.theItemInWorldManager.setWorld((WorldServer)p_72355_2_.worldObj);
     }
 
     @Shadow
