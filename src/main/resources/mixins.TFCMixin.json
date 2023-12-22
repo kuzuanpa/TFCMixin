@@ -6,10 +6,13 @@
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MixinEnchantments",
     "MixinEntityInPortal",
     "MixinPlayerFirstJoin",
     "MixinPlayerRespawn",
     "MixinPortalCreation",
-    "MixinWorldInfo"
+    "MixinPotionEffects",
+    "MixinWorldInfo",
+    "PotionAttackDamage"
   ]
 }
