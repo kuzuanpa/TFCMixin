@@ -1,8 +1,6 @@
 package cn.kuzuanpa.TFCMixin.mixin;
 
-import com.bioxx.tfc.api.TFCBlocks;
-import cpw.mods.fml.common.FMLLog;
-import net.minecraft.block.BlockLiquid;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
@@ -12,8 +10,6 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.server.management.ServerConfigurationManager;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.storage.WorldInfo;
-import org.apache.logging.log4j.Level;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

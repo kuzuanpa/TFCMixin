@@ -12,7 +12,6 @@
     "MixinPlayerRespawn",
     "MixinPortalCreation",
     "MixinPotionEffects",
-    "MixinWorldInfo",
-    "PotionAttackDamage"
+    "MixinWorldInfo"
   ]
 }
