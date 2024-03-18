@@ -12,6 +12,7 @@
     "MixinPlayerRespawn",
     "MixinPortalCreation",
     "MixinPotionEffects",
-    "MixinWorldInfo"
+    "MixinWorldInfo",
+    "MixinWorldServer"
   ]
 }
