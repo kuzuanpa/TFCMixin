@@ -47,15 +47,14 @@ dependencies {
 
 processResources
         {
+            // This will ensure that this task is redone when the versions change.
             inputs.property "version", project.version
             inputs.property "mcversion", project.minecraft.version
 
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod.info'
-                expand 'version': project.version, 'mcversion': project.minecraft.version
-            }
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
+            // Replace values in only mcmod.info.
+            filesMatching('mcmod.info') {
+                // Replace version and mcversion.
+                expand 'version':project.version, 'mcversion':project.minecraft.version
             }
         }
 
@@ -142,11 +141,12 @@ afterEvaluate {
                 // There's a bug in the AnnotationProcessor for 0.7.11 that will generate the annotations pointing to the parent class instead of subclass
                 // resulting in the mixin not being applied.  This is fixed in 0.8, however 0.8 needs guava > 21.0, and minecraft ships with 17.0.
                 // So as a hacky workaround... ship with 0.7.11, but use the AP from 0.8 for compiling
-                "-processorpath", projectDir.absolutePath + '/' + fixedRelPathToAP,
+
                 "-processor", "org.spongepowered.tools.obfuscation.MixinObfuscationProcessorInjection,org.spongepowered.tools.obfuscation.MixinObfuscationProcessorTargets",
                 "-Xlint:-sunapi", "-XDenableSunApiLintControl", "-XDignore.symbol.file",
                 "-AreobfSrgFile=${tasks.reobf.srg}", "-AoutSrgFile=${mixinSrg}", "-AoutRefMapFile=${refMap}"
         ]
+        options.annotationProcessorPath = files(projectDir.absolutePath + '/' + fixedRelPathToAP)
     }
     tasks.runClient{
 
