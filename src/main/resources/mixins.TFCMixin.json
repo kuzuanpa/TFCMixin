@@ -18,5 +18,8 @@
     "entity.MixinEntityPlayer",
     "entity.MixinSkeletonAvoid",
     "entity.MixinWolfAttack"
+  ],
+  "client": [
+    "MixinNetHandlerPlayClientError"
   ]
 }
