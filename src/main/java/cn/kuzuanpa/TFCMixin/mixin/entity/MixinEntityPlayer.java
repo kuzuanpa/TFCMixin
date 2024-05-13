@@ -1,4 +1,4 @@
-package cn.kuzuanpa.TFCMixin.mixin;
+package cn.kuzuanpa.TFCMixin.mixin.entity;
 
 import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 public class MixinEntityPlayer {
     @ModifyArg(method = "jump", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;addExhaustion(F)V"))
     public float mixinJumpExhaustion(float p_71020_1_){
-        return 0.1F;
+        return 0.05F;
     }
     @ModifyConstant(method = "addMovementStat", constant = @Constant(floatValue = 0.099999994F))
     public float mixinMovementExhaustion(float constant){

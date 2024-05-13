@@ -8,12 +8,15 @@
   "mixins": [
     "MixinEnchantments",
     "MixinEntityInPortal",
-    "MixinEntityPlayer",
     "MixinPlayerFirstJoin",
     "MixinPlayerRespawn",
     "MixinPortalCreation",
     "MixinPotionEffects",
     "MixinWorldInfo",
-    "MixinWorldServer"
+    "MixinWorldServer",
+    "entity.MixinCreeperAvoid",
+    "entity.MixinEntityPlayer",
+    "entity.MixinSkeletonAvoid",
+    "entity.MixinWolfAttack"
   ]
 }
