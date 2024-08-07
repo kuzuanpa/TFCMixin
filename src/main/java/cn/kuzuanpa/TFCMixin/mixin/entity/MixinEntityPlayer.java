@@ -10,11 +10,11 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(EntityPlayer.class)
 public class MixinEntityPlayer {
     @ModifyArg(method = "jump", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/EntityPlayer;addExhaustion(F)V"))
-    public float mixinJumpExhaustion(float p_71020_1_){
+    public float reduceJumpExhaustion(float p_71020_1_){
         return 0.05F;
     }
     @ModifyConstant(method = "addMovementStat", constant = @Constant(floatValue = 0.099999994F))
-    public float mixinMovementExhaustion(float constant){
-        return 0.02F;
+    public float reduceMovementExhaustion(float constant){
+        return 0.03F;
     }
 }

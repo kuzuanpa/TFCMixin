@@ -14,7 +14,7 @@ public class MixinPotionEffects {
     @Mutable @Shadow @Final public static Potion weakness;
     @ModifyConstant(method = "performEffect", constant=@Constant(floatValue = 1.0F),slice = @Slice(from = @At(value = "INVOKE",target = "Lnet/minecraft/entity/EntityLivingBase;getMaxHealth()F"),to = @At(value = "INVOKE",target = "Lnet/minecraft/entity/player/EntityPlayer;addExhaustion(F)V")))
     public float modifyRegenAndPoison(float constant) {
-        return constant*25.0F;
+        return constant*35.0F;
     }
     @ModifyArg(method = "affectEntity", at= @At(value = "INVOKE",target = "Lnet/minecraft/entity/EntityLivingBase;attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z"), index = 1)
     public float modifyInstantDamage(float p_70097_2_){

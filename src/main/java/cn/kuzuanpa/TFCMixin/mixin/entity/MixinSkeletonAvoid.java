@@ -21,7 +21,7 @@ public abstract class MixinSkeletonAvoid extends EntityMob {
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    public void attackSkeleton(World p_i1696_1_, CallbackInfo ci){
+    public void avoidWolf(World p_i1696_1_, CallbackInfo ci){
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolf.class, 6.0F, 1.0D, 1.2D));
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityWolfTFC.class, 6.0F, 1.0D, 1.2D));
     }

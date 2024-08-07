@@ -27,7 +27,7 @@ public class MixinPlayerFirstJoin{
 
     //Make player born in TFCDim when first join.
     @Inject(method = "initializeConnectionToPlayer", at = @At(value = "HEAD"),remap = false)
-    public void initializeConnectionToPlayer(NetworkManager p_72355_1_, EntityPlayerMP p_72355_2_, NetHandlerPlayServer nethandlerplayserver, CallbackInfo ci){
+    public void spawnPlayerInTFC(NetworkManager p_72355_1_, EntityPlayerMP p_72355_2_, NetHandlerPlayServer nethandlerplayserver, CallbackInfo ci){
         World playerWorld = this.mcServer.worldServerForDimension(p_72355_2_.dimension);
         if (this.readPlayerDataFromFile(p_72355_2_)==null)
         {

@@ -26,7 +26,7 @@ public abstract class MixinCreeperAvoid extends EntityMob {
     }
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    public void attackSkeleton(World p_i1696_1_, CallbackInfo ci){
+    public void avoidOcelotTFC(World p_i1696_1_, CallbackInfo ci){
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityOcelotTFC.class, 6.0F, 1.0D, 1.2D));
     }
 }

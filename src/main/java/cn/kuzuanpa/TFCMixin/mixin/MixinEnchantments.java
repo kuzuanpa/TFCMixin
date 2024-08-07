@@ -18,6 +18,6 @@ public class MixinEnchantments extends Enchantment{
 
     @Inject(method = "func_152376_a",at=@At("RETURN"),cancellable = true)
     public void modifyDamage(int p_152376_1_, EnumCreatureAttribute p_152376_2_, CallbackInfoReturnable<Float> cir) {
-        cir.setReturnValue(cir.getReturnValueF()*50.0F);
+        cir.setReturnValue(cir.getReturnValueF()*65.0F);
     }
 }
