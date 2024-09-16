@@ -12,6 +12,8 @@
     "MixinPlayerRespawn",
     "MixinPortalCreation",
     "MixinPotionEffects",
+    "MixinRemoveSandGlassRecipe",
+    "MixinRenderBlocks",
     "MixinWorldInfo",
     "MixinWorldServer",
     "entity.MixinCreeperAvoid",
