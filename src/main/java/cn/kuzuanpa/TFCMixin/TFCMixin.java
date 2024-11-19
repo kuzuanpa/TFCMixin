@@ -7,6 +7,7 @@ public class TFCMixin {
     static boolean optifineChecked = false;
     static boolean ftbChecked = false;
     static boolean suChecked = false;
+    public static boolean outputDataWhenChunkSavingFailed = true;
     public TFCMixin(){
         if(!optifineChecked)try{Class.forName("optifine.OptiFineTweaker");throw new IllegalArgumentException("Optifine Not Supported!");}catch (ClassNotFoundException e){optifineChecked=true;}
         if(!ftbChecked)try{Class.forName("ftb.utils.mod.FTBU");throw new IllegalArgumentException("FTBU Not Supported!");}catch (ClassNotFoundException e){ftbChecked=true;}

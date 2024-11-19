@@ -28,6 +28,8 @@ apply plugin: 'scala'
 apply plugin: 'forge'
 apply plugin: 'idea'
 
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
 version = "${version}"
 group = "${group}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "${jarName}"
@@ -66,7 +68,7 @@ processResources
 //to your client and server program arguments if working in a dev environment.
 def yourMixinConfig = "mixins.${modId}.json"
 def refMapForYourConfig = "mixins.${modId}.refmap.json"
-def relativePathToMixinAP = 'libs/mixin-0.8-SNAPSHOT.jar'
+def relativePathToMixinAP = 'libs/+unimixins-all-1.7.10-0.1.17.jar'
 
 def embedMixin = false
 
@@ -115,7 +117,6 @@ jar {
         attributes.put("ForceLoadAsMod", true)
         attributes.put("MixinConfigs", yourMixinConfig)
     }
-
     // embed libraries in jar
     from configurations.embed.collect {
         exclude '**/LICENSE.txt'
