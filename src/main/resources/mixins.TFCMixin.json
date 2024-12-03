@@ -25,6 +25,7 @@
     "entity.MixinWolfAttack"
   ],
   "client": [
+    "MixinIngameMenu",
     "MixinNetHandlerPlayClientError"
   ]
 }
