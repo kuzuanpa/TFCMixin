@@ -26,6 +26,7 @@
   ],
   "client": [
     "MixinIngameMenu",
-    "MixinNetHandlerPlayClientError"
+    "MixinNetHandlerPlayClientError",
+    "MixinOpenQuest"
   ]
 }
