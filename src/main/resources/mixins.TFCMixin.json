@@ -27,6 +27,8 @@
   "client": [
     "MixinIngameMenu",
     "MixinNetHandlerPlayClientError",
-    "MixinOpenQuest"
+    "MixinOpenQuest",
+    "MixinUnicodeFontOnSetting",
+    "MixinUnicodeFontOnStart"
   ]
 }
