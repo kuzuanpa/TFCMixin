@@ -33,7 +33,7 @@ public class TFCMixin {
             if(tipsLoaded)return;
             String path = "config/Betterloadingscreen/tips/"+FMLCommonHandler.instance().getCurrentLanguage()+".txt";
             if(!Files.exists(Paths.get(path)))path = "config/Betterloadingscreen/tips/en_US.txt";
-            Files.readAllLines(Paths.get(path)).stream().filter(str->!str.startsWith("#")).forEach(tips::add);
+            Files.readAllLines(Paths.get(path)).stream().filter(str->!str.startsWith("#")).map(String::trim).forEach(tips::add);
             tipsLoaded = true;
         }catch (Throwable e){
             tips.add("Exception occurred while loading tips, please send log to dev");

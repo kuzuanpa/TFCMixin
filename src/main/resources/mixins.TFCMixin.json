@@ -11,6 +11,7 @@
     "MixinCompressedStreamTools",
     "MixinEnchantments",
     "MixinEntityInPortal",
+    "MixinItemStack",
     "MixinPlayerFirstJoin",
     "MixinPlayerRespawn",
     "MixinPortalCreation",
