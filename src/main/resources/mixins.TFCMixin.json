@@ -29,7 +29,8 @@
     "MixinIngameMenu",
     "MixinNetHandlerPlayClientError",
     "MixinOpenQuest",
-    "MixinUnicodeFontOnSetting",
-    "MixinUnicodeFontOnStart"
+    "unicodeFont.MixinUnicodeFontOnSetting",
+    "unicodeFont.MixinUnicodeFontOnStart",
+    "unicodeFont.MixinUnicodeFontShadow"
   ]
 }

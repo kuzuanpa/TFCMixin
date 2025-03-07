@@ -1,17 +1,12 @@
-package cn.kuzuanpa.TFCMixin.mixin;
+package cn.kuzuanpa.TFCMixin.mixin.unicodeFont;
 
-import cn.kuzuanpa.TFCMixin.TFCMixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.settings.GameSettings;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static cn.kuzuanpa.TFCMixin.TFCMixin.loadScreenTips;
 
 @Mixin(GameSettings.class)
 public class MixinUnicodeFontOnSetting {
