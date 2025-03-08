@@ -113,6 +113,7 @@ jar {
     from refMap
     manifest {
         attributes.put("TweakClass", "org.spongepowered.asm.launch.MixinTweaker")
+        attributes.put("FMLCorePlugin", "cn.kuzuanpa.TFCMixin.TFCMixinEarly")
         attributes.put("FMLCorePluginContainsFMLMod", true)
         attributes.put("ForceLoadAsMod", true)
         attributes.put("MixinConfigs", yourMixinConfig)

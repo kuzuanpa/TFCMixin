@@ -1,13 +1,13 @@
 {
   "required": true,
   "minVersion": "0.7.11",
-  "package": "cn.kuzuanpa.TFCMixin.mixin.late",
+  "package": "cn.kuzuanpa.TFCMixin.mixin.early",
   "refmap": "mixins.TFCMixin.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
-    "MixinWailaDrawTooltipBox"
+    "MixinUnicodeFontShadow"
   ]
 }

@@ -30,7 +30,6 @@
     "MixinNetHandlerPlayClientError",
     "MixinOpenQuest",
     "unicodeFont.MixinUnicodeFontOnSetting",
-    "unicodeFont.MixinUnicodeFontOnStart",
-    "unicodeFont.MixinUnicodeFontShadow"
+    "unicodeFont.MixinUnicodeFontOnStart"
   ]
 }
